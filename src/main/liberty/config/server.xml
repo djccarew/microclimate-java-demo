@@ -1,0 +1,29 @@
+<server>
+
+    <featureManager>
+        <feature>webProfile-7.0</feature>
+    </featureManager>
+
+    <httpEndpoint id="defaultHttpEndpoint"
+                  host="*"
+                  httpPort="9080"
+                  httpsPort="-1">
+    </httpEndpoint>
+
+    <variable name="DB2_JCC_DRIVER_PATH" value="/opt/ibm/wlp/usr/shared/resources/db2"/>
+
+    <webApplication name="GetStartedJava" context-root="/liberty-starter" location="GetStartedJava.war"/>
+
+    <!--These elements are from the profile level configuration. Not all of them may be necessary for your applicaiton.-->
+    <dataSource containerAuthDataRef="db2access" id="libertystarter" jdbcDriverRef="DB2_Using_IBM_JCC_Driver" jndiName="jdbc/libertystarter">
+            <properties.db2.jcc password="mko04esZ" user="db2inst1" beginTranForResultSetScrollingAPIs="false" beginTranForVendorAPIs="false" connectionSharing="1" databaseName="DEMO" enableClientInformation="false" enableMultithreadedAccessDetection="false" errorDetectionModel="ExceptionMapping" freeResourcesOnClose="false" jmsOnePhaseOptimization="false" name="libertystarter" nonTransactionalDataSource="false" portNumber="50000" preTestSQLString="SELECT CURRENT SQLID FROM SYSIBM.SYSDUMMY1" reauthentication="false" retrieveMessagesFromServerOnGetMessage="true" serverName="169.47.69.67" traceLevel="-1" unbindClientRerouteListFromJndi="false" useTransactionRedirect="false" validateNewConnection="false" validateNewConnectionRetryCount="100" validateNewConnectionRetryInterval="3" />
+            <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
+   </dataSource>
+   <jdbcDriver id="DB2_Using_IBM_JCC_Driver" javax.sql.DataSource="com.ibm.db2.jcc.DB2ConnectionPoolDataSource">
+            <library>
+                <file name="${DB2_JCC_DRIVER_PATH}/db2jcc4.jar"/>
+            </library>
+   </jdbcDriver>
+
+
+</server>
